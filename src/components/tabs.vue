@@ -11,12 +11,10 @@
     <v-card-text>
       <v-tabs-window v-model="tab">
         <v-tabs-window-item value="one"> <Alltabs /> </v-tabs-window-item>
-
         <v-tabs-window-item value="two"> <NovelTabs /> </v-tabs-window-item>
-
         <v-tabs-window-item value="three"> <ComicTabs /> </v-tabs-window-item>
-        <v-tabs-window-item value="three"> <MemberTabs /> </v-tabs-window-item>
-        <v-tabs-window-item value="three"> Forum </v-tabs-window-item>
+        <v-tabs-window-item value="four"> <MemberTabs /> </v-tabs-window-item>
+        <v-tabs-window-item value="five"> <ForumTabs /> </v-tabs-window-item>
       </v-tabs-window>
     </v-card-text>
   </v-card>
@@ -27,6 +25,7 @@ import NovelTabs from "./novelTabs.vue";
 import ComicTabs from "./comicTabs.vue";
 import Alltabs from "./alltabs.vue";
 import MemberTabs from "./memberTabs.vue";
+import ForumTabs from "./forumTabs.vue";
 
 export default {
   name: "tabsVue",
@@ -35,6 +34,7 @@ export default {
     ComicTabs,
     Alltabs,
     MemberTabs,
+    ForumTabs,
   },
   data() {
     return {

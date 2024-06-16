@@ -1,8 +1,16 @@
 <template>
-  <div class="grid">
-    <div v-for="data in datas" :key="data">
-      <img :src="data.thumbnail" alt="gambar" class="img" />
-      <p class="title">{{ data.title }}</p>
+  <div>
+    <div class="grid">
+      <div v-for="data in datas" :key="data" class="box">
+        <img
+          v-if="data.thumbnail"
+          :src="data.thumbnail"
+          alt="gambar"
+          class="img"
+        />
+        <img v-else :src="placeholder" alt="" class="img" />
+        <p class="title">{{ data.member_name }}</p>
+      </div>
     </div>
 
     <div>
@@ -25,6 +33,8 @@ export default {
         all: "",
       },
       datas: [],
+      placeholder:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
     };
   },
   methods: {
@@ -79,5 +89,9 @@ export default {
 .title {
   font-size: 20px;
   font-weight: 600;
+}
+
+.box {
+  overflow: hidden;
 }
 </style>

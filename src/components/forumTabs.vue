@@ -1,18 +1,29 @@
 <template>
-  <div class="">
-    <div v-for="data in datas" :key="data" class="section-category">
-      <SectionCategory :datas="data.data" :title="data.title" />
+  <div>
+    <div class="grid">
+      <div v-for="data in datas" :key="data" class="box">
+        <img
+          v-if="data.thumbnail"
+          :src="data.thumbnail"
+          alt="gambar"
+          class="img"
+        />
+        <img v-else :src="placeholder" alt="" class="img" />
+        <p class="title">{{ data.member_name }}</p>
+      </div>
+    </div>
+
+    <div>
+      <button class="btn" @click="increaseLimit">Show More</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import SectionCategory from "./sectionCategory.vue";
 
 export default {
-  components: { SectionCategory },
-  name: "alltabsVue",
+  name: "MemberTabsVue",
   data() {
     return {
       parameter: {
@@ -22,9 +33,15 @@ export default {
         all: "",
       },
       datas: [],
+      placeholder:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
     };
   },
   methods: {
+    increaseLimit() {
+      this.parameter.limit += 10;
+      this.fetchData();
+    },
     async fetchData() {
       try {
         const param = new FormData();
@@ -43,7 +60,7 @@ export default {
           }
         );
         console.log(res);
-        this.datas = res.data.DATA;
+        this.datas = res.data.DATA[3].data;
       } catch (error) {
         console.log(error);
       }
@@ -61,6 +78,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   margin-top: 20px;
+  row-gap: 50px;
 }
 
 .img {
@@ -73,9 +91,7 @@ export default {
   font-weight: 600;
 }
 
-.section-category {
-  margin-bottom: 50px;
-  display: flex;
-  flex-direction: column;
+.box {
+  overflow: hidden;
 }
 </style>

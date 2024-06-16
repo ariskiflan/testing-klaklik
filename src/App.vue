@@ -2,16 +2,6 @@
   <div id="app">
     <h1 class="heading">Testing klaklik</h1>
 
-    <div>
-      <form action="">
-        <input
-          type="text"
-          placeholder="Mau Cari Apa Hari Ini?"
-          class="input-search"
-        />
-      </form>
-    </div>
-
     <div class="tabs-box">
       <Tabs />
     </div>
@@ -136,15 +126,6 @@ export default {
   border-radius: 5px;
   border: none;
   font-size: 20px;
-}
-
-.input-search {
-  width: 80%;
-  height: 50px;
-  border-radius: 10px;
-  border: solid 1px #000;
-  padding-left: 10px;
-  font-size: 16px;
 }
 
 .tabs-box {

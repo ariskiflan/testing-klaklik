@@ -1,9 +1,12 @@
 <template>
-  <div class="grid">
-    <div v-for="data in datas" :key="data">
-      <img :src="data.thumbnail" alt="gambar" class="img" />
-      <p class="title">{{ data.title }}</p>
+  <div>
+    <div class="grid">
+      <div v-for="data in datas" :key="data">
+        <img :src="data.thumbnail" alt="gambar" class="img" />
+        <p class="title">{{ data.title }}</p>
+      </div>
     </div>
+
     <div>
       <button class="btn" @click="increaseLimit">Show More</button>
     </div>
