@@ -1,5 +1,19 @@
 <template>
   <div>
+    <div>
+      <form @submit.prevent="fetchData">
+        <div class="form-box">
+          <input
+            type="search"
+            v-model="parameter.keyword"
+            placeholder="Search..."
+            class="input-search"
+          />
+          <button type="submit" class="btn-search">Search</button>
+        </div>
+      </form>
+    </div>
+
     <div class="grid">
       <div v-for="data in datas" :key="data">
         <img :src="data.thumbnail" alt="gambar" class="img" />
@@ -29,6 +43,7 @@ export default {
       datas: [],
     };
   },
+
   methods: {
     increaseLimit() {
       this.parameter.limit += 10;
@@ -51,8 +66,10 @@ export default {
             },
           }
         );
+
         console.log(res);
-        this.datas = res.data.DATA[0].data;
+        const filtered = res.data.DATA.find((item) => item.title === "Novel");
+        this.datas = filtered.data;
       } catch (error) {
         console.log(error);
       }
@@ -81,5 +98,41 @@ export default {
 .title {
   font-size: 20px;
   font-weight: 600;
+}
+
+.input-search {
+  width: 60%;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 1px #000;
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+.form-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-search {
+  width: 10%;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 1px #000;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 10%;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 1px #000;
+  color: #000;
+  font-size: 16px;
+  margin-top: 20px;
 }
 </style>

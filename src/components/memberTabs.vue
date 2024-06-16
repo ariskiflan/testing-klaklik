@@ -1,5 +1,19 @@
 <template>
   <div>
+    <div>
+      <form @submit.prevent="fetchData">
+        <div class="form-box">
+          <input
+            type="search"
+            v-model="parameter.keyword"
+            placeholder="Search..."
+            class="input-search"
+          />
+          <button type="submit" class="btn-search">Search</button>
+        </div>
+      </form>
+    </div>
+
     <div class="grid">
       <div v-for="data in datas" :key="data" class="box">
         <img
@@ -37,11 +51,13 @@ export default {
         "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
     };
   },
+
   methods: {
     increaseLimit() {
       this.parameter.limit += 10;
       this.fetchData();
     },
+
     async fetchData() {
       try {
         const param = new FormData();
@@ -60,7 +76,8 @@ export default {
           }
         );
         console.log(res);
-        this.datas = res.data.DATA[2].data;
+        const filtered = res.data.DATA.find((item) => item.title === "Member");
+        this.datas = filtered.data;
       } catch (error) {
         console.log(error);
       }
@@ -93,5 +110,42 @@ export default {
 
 .box {
   overflow: hidden;
+}
+
+.input-search {
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 1px #000;
+  padding-left: 10px;
+  font-size: 16px;
+}
+
+.form-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-search {
+  width: 10%;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 1px #000;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn {
+  width: 10%;
+  height: 50px;
+  border-radius: 10px;
+  border: solid 1px #000;
+  color: #000;
+  font-size: 16px;
+  margin-top: 20px;
 }
 </style>

@@ -39,34 +39,6 @@ export default {
   data() {
     return {
       tab: null,
-      dummys: [
-        {
-          title: "Title 1",
-          thumbnail:
-            "https://i.pinimg.com/736x/59/de/48/59de48189e1ee84dc0c14b6514342cd8.jpg",
-        },
-        {
-          title: " Title 2",
-          thumbnail:
-            "https://i.pinimg.com/736x/59/de/48/59de48189e1ee84dc0c14b6514342cd8.jpg",
-        },
-        {
-          title: "  Title 3",
-          thumbnail:
-            "https://i.pinimg.com/736x/59/de/48/59de48189e1ee84dc0c14b6514342cd8.jpg",
-        },
-        {
-          title: " Title 4",
-          thumbnail:
-            "https://i.pinimg.com/736x/59/de/48/59de48189e1ee84dc0c14b6514342cd8.jpg",
-        },
-        {
-          title: " Title 5",
-          thumbnail:
-            "https://i.pinimg.com/736x/59/de/48/59de48189e1ee84dc0c14b6514342cd8.jpg",
-        },
-      ],
-      data: [],
     };
   },
 };
