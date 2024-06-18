@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <form @submit.prevent="fetchData">
+      <form @submit.prevent="search">
         <div class="form-box">
           <input
             type="search"
@@ -22,7 +22,13 @@
     </div>
 
     <div>
-      <button class="btn" @click="increaseLimit">Show More</button>
+      <button
+        v-if="info.total > parameter.limit"
+        class="btn"
+        @click="increaseLimit"
+      >
+        Show More
+      </button>
     </div>
   </div>
 </template>
@@ -41,23 +47,24 @@ export default {
         all: "",
       },
       datas: [],
+      info: {},
     };
   },
 
   methods: {
+    async search() {
+      this.parameter.limit = 10;
+      await this.fetchData();
+    },
     increaseLimit() {
       this.parameter.limit += 10;
       this.fetchData();
     },
     async fetchData() {
       try {
-        const param = new FormData();
-        Object.entries(this.parameter).forEach(([key, value]) => {
-          param.append(key, value);
-        });
         const res = await axios.post(
           "https://dvl.klaklik.com/gateway2/newsearch?version=3",
-          param,
+          this.parameter,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -67,9 +74,8 @@ export default {
           }
         );
 
-        console.log(res);
-        const filtered = res.data.DATA.find((item) => item.title === "Novel");
-        this.datas = filtered.data;
+        this.info = res.data.DATA.find((item) => item.title === "Novel");
+        this.datas = this.info.data;
       } catch (error) {
         console.log(error);
       }

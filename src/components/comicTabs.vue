@@ -61,13 +61,9 @@ export default {
     },
     async fetchData() {
       try {
-        const param = new FormData();
-        Object.entries(this.parameter).forEach(([key, value]) => {
-          param.append(key, value);
-        });
         const res = await axios.post(
           "https://dvl.klaklik.com/gateway2/newsearch?version=3",
-          param,
+          this.parameter,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -76,7 +72,7 @@ export default {
             },
           }
         );
-        console.log(res);
+
         this.info = res.data.DATA.find((item) => item.title === "Comic");
         this.datas = this.info.data;
       } catch (error) {
